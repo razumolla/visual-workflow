@@ -16,10 +16,6 @@ export default function PropertiesPanel({
     return (
       <div className="text-sm space-y-2">
         <div>
-          <div className="text-xs text-gray-500">ID</div>
-          <div className="font-mono text-xs break-all">{selected.id}</div>
-        </div>
-        <div>
           <div className="text-xs text-gray-500">Type</div>
           <div className="uppercase font-medium">{String(selected.type)}</div>
         </div>

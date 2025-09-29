@@ -22,7 +22,7 @@ import { nodeTypes } from "./components/nodes/nodeTypes";
 import Modal from "./components/Modal";
 import Palette from "./components/Palette";
 import PropertiesPanel from "./components/PropertiesPanel";
-// import NodeEditor from "./components/editors/NodeEditor";
+import NodeEditor from "./components/editors/NodeEditor";
 
 import { defaultNodeData, downloadText } from "./utils/defaults";
 import {
@@ -312,11 +312,11 @@ function InnerFlowBuilder() {
               applyEdit();
             }}
           >
-            {/* <NodeEditor
+            <NodeEditor
               type={selectedNode.type as NodeType}
               value={draftData}
               onChange={setDraftData}
-            /> */}
+            />
             <div className="flex justify-end gap-2 pt-2">
               <button
                 type="button"
