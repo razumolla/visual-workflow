@@ -19,7 +19,7 @@ export default function Modal({
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">{title}</h3>
           <button
-            className="rounded-full p-2 hover:bg-gray-100 focus:outline-none focus:ring"
+            className="rounded-full px-3 py-[6px] bg-gray-200  hover:bg-red-200 focus:outline-none hover:cursor-pointer"
             onClick={onClose}
             aria-label="Close"
           >

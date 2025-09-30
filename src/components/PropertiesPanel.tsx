@@ -47,7 +47,7 @@ export default function PropertiesPanel({
             </div>
             <button
               onClick={onEdit}
-              className="rounded-lg border px-2 py-1 text-xs hover:bg-gray-50"
+              className="rounded-lg bg-blue-600 text-white px-3 py-2 text-sm hover:opacity-80 hover:cursor-pointer"
               aria-label="Edit node"
             >
               Edit
@@ -56,7 +56,7 @@ export default function PropertiesPanel({
           {readOnly}
           <button
             onClick={onDelete}
-            className="mt-3 w-full rounded-lg border px-3 py-2 text-sm text-rose-600 hover:bg-rose-50"
+            className="mt-3 w-full rounded-lg border px-3 py-2 text-sm text-rose-600 hover:bg-rose-50 hover:cursor-pointer"
           >
             Delete Node
           </button>
