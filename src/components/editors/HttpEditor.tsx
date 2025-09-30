@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import TextInput from "./bits/TextInput";
 import TextArea from "./bits/TextArea";
 import Select from "./bits/Select";
