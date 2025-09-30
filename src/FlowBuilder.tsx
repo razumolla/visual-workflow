@@ -206,6 +206,7 @@ function InnerFlowBuilder() {
     []
   );
 
+  // Selected node object
   const selectedNode = React.useMemo(
     () => nodes.find((n) => n.id === selectedNodeId) || null,
     [nodes, selectedNodeId]
@@ -217,6 +218,7 @@ function InnerFlowBuilder() {
     if (selectedNode) setDraftData({ ...(selectedNode.data as any) });
   }, [selectedNode]);
 
+  // Apply edits to selected node
   const applyEdit = React.useCallback(() => {
     if (!selectedNode) return;
     setNodes((nds) => {
@@ -237,6 +239,7 @@ function InnerFlowBuilder() {
     setModalOpen(false);
   }, [draftData, edges, getViewport, history, selectedNode, setNodes]);
 
+  // Delete selected nodes/edges
   const deleteSelected = React.useCallback(() => {
     let nextEdges = edges;
     let nextNodes = nodes;
@@ -427,14 +430,14 @@ function InnerFlowBuilder() {
             <div className="flex justify-end gap-2 pt-2">
               <button
                 type="button"
-                className="rounded-lg border border-red-500 px-3 py-2 text-sm hover:bg-red-200 hover:cursor-pointer "
+                className="rounded-lg border border-red-500 px-3 py-2 text-base hover:bg-red-200 hover:cursor-pointer "
                 onClick={() => setModalOpen(false)}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="rounded-lg bg-blue-600 text-white px-3 py-2 text-sm hover:opacity-80 hover:cursor-pointer "
+                className="rounded-lg bg-blue-600 text-white px-3 py-2 text-base hover:opacity-80 hover:cursor-pointer "
               >
                 Save
               </button>

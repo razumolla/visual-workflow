@@ -29,7 +29,7 @@ export default function Palette({
   const fileRef = React.useRef<HTMLInputElement | null>(null);
   return (
     <aside className="border-r bg-white p-3">
-      <h2 className="text-sm font-semibold mb-3">All Nodes</h2>
+      <h2 className="text-base font-semibold mb-3">All Nodes</h2>
       <div className="grid gap-2">
         {(["webhook", "code", "http", "smtp"] as NodeType[]).map((t) => (
           <button
@@ -51,7 +51,7 @@ export default function Palette({
         ))}
       </div>
       <div className="mt-6 space-y-2">
-        <h3 className="text-sm font-semibold">Flow</h3>
+        <h3 className="text-base font-semibold">Flow</h3>
         <div className="flex flex-col gap-2">
           <button
             onClick={onExport}

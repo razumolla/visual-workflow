@@ -15,7 +15,7 @@ export default function KeyValueEditor({
   const add = () => onChange([...(items || []), { key: "", value: "" }]);
   const remove = (i: number) => onChange(items.filter((_, idx) => idx !== i));
   return (
-    <div className="text-sm">
+    <div className="text-base">
       <div className="flex items-center justify-between mb-1">
         <span className="text-gray-700">Headers</span>
         <button
@@ -28,7 +28,7 @@ export default function KeyValueEditor({
       </div>
       <div className="space-y-2">
         {items.map((it, i) => (
-          <div key={i} className="grid grid-cols-5 gap-2">
+          <div key={i} className="grid grid-cols-6 gap-2">
             <input
               className="col-span-2 rounded border border-gray-300 px-2 py-1"
               placeholder="Key"
@@ -44,9 +44,9 @@ export default function KeyValueEditor({
             <button
               type="button"
               onClick={() => remove(i)}
-              className="text-xs text-red-600 hover:underline"
+              className="text-base px-2 py-1 rounded-full  text-red-600 bg-red-100 hover:bg-red-200 hover:cursor-pointer"
             >
-              Remove
+              x
             </button>
           </div>
         ))}
