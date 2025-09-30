@@ -4,7 +4,7 @@ import type { NodeType } from "../types/flow";
 export default function Palette({
   onDragStart,
   onExport,
-  onImport,
+  // onImport,
   onImportFile,
   onExportPng,
   onUndo,
@@ -16,7 +16,7 @@ export default function Palette({
 }: {
   onDragStart: (e: React.DragEvent, t: NodeType) => void;
   onExport: () => void;
-  onImport: () => void;
+  // onImport: () => void;
   onImportFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onExportPng: () => void;
   onUndo: () => void;

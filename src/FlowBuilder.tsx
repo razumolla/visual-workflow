@@ -258,7 +258,7 @@ function InnerFlowBuilder() {
       <Palette
         onDragStart={onDragStart}
         onExport={exportJSON}
-        onImport={() => {}}
+        // onImport={() => {}}
         onImportFile={onImportFile}
         onExportPng={exportPNG}
         onUndo={history.undo}
