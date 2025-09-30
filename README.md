@@ -4,7 +4,7 @@ A frontend-only visual workflow builder (n8n-style) that lets you drag predefine
 
 **Live Demo:** https://visual-workflow-app.vercel.app/
 
----
+## [Live Demo](https://visual-workflow-app.vercel.app/)
 
 ## Table of Contents
 
