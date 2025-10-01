@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Select({
   label,
   name,
@@ -8,8 +7,8 @@ export default function Select({
 }: {
   label: string;
   name: string;
-  value?: any;
-  onChange: (v: any) => void;
+  value?: string | number;
+  onChange: (v: string | number) => void;
   options: { label: string; value: string | number }[];
 }) {
   return (

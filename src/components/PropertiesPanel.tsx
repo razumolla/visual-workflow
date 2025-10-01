@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import { useMemo } from "react";
 
 export default function PropertiesPanel({
   selected,
@@ -10,7 +10,7 @@ export default function PropertiesPanel({
   onEdit: () => void;
   onDelete: () => void;
 }) {
-  const readOnly = React.useMemo(() => {
+  const readOnly = useMemo(() => {
     if (!selected) return null;
     const data = (selected.data || {}) as Record<string, unknown>;
     return (

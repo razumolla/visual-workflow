@@ -17,6 +17,7 @@ export default function GenericNode({
   type: NodeType;
 }) {
   const color = NODE_BG[type] || "bg-gray-100 border-gray-300";
+  console.log(data);
   return (
     <div
       className={`rounded-xl border ${color} px-3 py-2 shadow-sm text-sm min-w-[140px]`}

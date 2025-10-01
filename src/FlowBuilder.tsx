@@ -1,5 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   Background,
   Controls,
@@ -46,12 +53,10 @@ function InnerFlowBuilder() {
   const [edges, setEdges] = useEdgesState([] as Edge[]);
   const { setViewport, getViewport, project } = useReactFlow();
 
-  const [selectedNodeId, setSelectedNodeId] = React.useState<string | null>(
-    null
-  );
-  const [selectedEdgeIds, setSelectedEdgeIds] = React.useState<string[]>([]);
-  const [modalOpen, setModalOpen] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+  const [selectedEdgeIds, setSelectedEdgeIds] = useState<string[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const history = useHistory<{
     nodes: Node[];
@@ -64,10 +69,10 @@ function InnerFlowBuilder() {
   });
 
   // Guard to avoid feedback loop when applying a history state to the canvas
-  const applyingHistoryRef = React.useRef(false);
+  const applyingHistoryRef = useRef(false);
 
   // Load saved state from localStorage on mount (and push an initial snapshot)
-  React.useEffect(() => {
+  useEffect(() => {
     const parsed = loadState();
     if (parsed) {
       const { rfNodes, rfEdges, viewport } = toReactFlow(parsed);
@@ -80,11 +85,10 @@ function InnerFlowBuilder() {
         viewport: viewport || { x: 0, y: 0, zoom: 1 },
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Apply history.present into React Flow (without creating a new snapshot)
-  React.useEffect(() => {
+  useEffect(() => {
     const { nodes: hn, edges: he, viewport: hv } = history.present || {};
     if (!hn || !he || !hv) return;
     applyingHistoryRef.current = true;
@@ -95,24 +99,23 @@ function InnerFlowBuilder() {
     (queueMicrotask ?? ((fn: () => void) => setTimeout(fn, 0)))(() => {
       applyingHistoryRef.current = false;
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history.present]);
 
   // Auto-save (debounced)
-  const saveTimeout = React.useRef<number | null>(null);
-  const scheduleSave = React.useCallback(() => {
+  const saveTimeout = useRef<number | null>(null);
+  const scheduleSave = useCallback(() => {
     if (saveTimeout.current) window.clearTimeout(saveTimeout.current);
     saveTimeout.current = window.setTimeout(() => {
       const viewport = getViewport();
       saveState(fromReactFlow(nodes, edges, viewport));
     }, 350);
   }, [edges, nodes, getViewport]);
-  React.useEffect(() => {
+  useEffect(() => {
     scheduleSave();
   }, [nodes, edges, scheduleSave]);
 
   // React Flow change handlers -> apply changes + snapshot (unless applying history)
-  const onNodesChange = React.useCallback(
+  const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
       if (applyingHistoryRef.current) return;
       setNodes((nds) => {
@@ -124,7 +127,7 @@ function InnerFlowBuilder() {
     [edges, getViewport, history, setNodes]
   );
 
-  const onEdgesChange = React.useCallback(
+  const onEdgesChange = useCallback(
     (changes: EdgeChange[]) => {
       if (applyingHistoryRef.current) return;
       setEdges((eds) => {
@@ -136,7 +139,7 @@ function InnerFlowBuilder() {
     [nodes, getViewport, history, setEdges]
   );
 
-  const onConnect = React.useCallback(
+  const onConnect = useCallback(
     (params: Edge | Connection) => {
       setEdges((eds) => {
         const next = addEdge({ ...params, type: undefined }, eds);
@@ -147,7 +150,7 @@ function InnerFlowBuilder() {
     [nodes, getViewport, history, setEdges]
   );
 
-  const onDrop = React.useCallback(
+  const onDrop = useCallback(
     (event: React.DragEvent) => {
       event.preventDefault();
       const type =
@@ -177,22 +180,22 @@ function InnerFlowBuilder() {
     [edges, getViewport, history, project, setNodes]
   );
 
-  const onDragOver = React.useCallback((event: React.DragEvent) => {
+  const onDragOver = useCallback((event: React.DragEvent) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   }, []);
 
-  const onNodeClick: NodeMouseHandler = React.useCallback((_, node) => {
+  const onNodeClick: NodeMouseHandler = useCallback((_, node) => {
     setSelectedNodeId(node.id);
   }, []);
 
-  const onNodeDoubleClick: NodeMouseHandler = React.useCallback((_, node) => {
+  const onNodeDoubleClick: NodeMouseHandler = useCallback((_, node) => {
     setSelectedNodeId(node.id);
     setModalOpen(true);
   }, []);
 
   // Track selection (nodes & edges) for deletion
-  const onSelectionChange = React.useCallback(
+  const onSelectionChange = useCallback(
     ({
       nodes: selNodes,
       edges: selEdges,
@@ -207,19 +210,19 @@ function InnerFlowBuilder() {
   );
 
   // Selected node object
-  const selectedNode = React.useMemo(
+  const selectedNode = useMemo(
     () => nodes.find((n) => n.id === selectedNodeId) || null,
     [nodes, selectedNodeId]
   );
 
   // Editing modal draft
-  const [draftData, setDraftData] = React.useState<Record<string, unknown>>({});
-  React.useEffect(() => {
+  const [draftData, setDraftData] = useState<Record<string, unknown>>({});
+  useEffect(() => {
     if (selectedNode) setDraftData({ ...(selectedNode.data as any) });
   }, [selectedNode]);
 
   // Apply edits to selected node
-  const applyEdit = React.useCallback(() => {
+  const applyEdit = useCallback(() => {
     if (!selectedNode) return;
     setNodes((nds) => {
       const updated = nds.map((n) =>
@@ -240,7 +243,7 @@ function InnerFlowBuilder() {
   }, [draftData, edges, getViewport, history, selectedNode, setNodes]);
 
   // Delete selected nodes/edges
-  const deleteSelected = React.useCallback(() => {
+  const deleteSelected = useCallback(() => {
     let nextEdges = edges;
     let nextNodes = nodes;
 
@@ -280,7 +283,7 @@ function InnerFlowBuilder() {
   ]);
 
   // keyboard shortcuts: Delete edges/nodes; Ctrl/Cmd+Z / Shift+Ctrl/Cmd+Z
-  React.useEffect(() => {
+  useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const isDelete =
         e.key === "Delete" ||
@@ -301,13 +304,13 @@ function InnerFlowBuilder() {
   }, [deleteSelected, history]);
 
   // export/import JSON
-  const exportJSON = React.useCallback(() => {
+  const exportJSON = useCallback(() => {
     const viewport = getViewport();
     const toExport = fromReactFlow(nodes, edges, viewport);
     downloadText("flow.json", JSON.stringify(toExport, null, 2));
   }, [edges, getViewport, nodes]);
 
-  const onImportFile = React.useCallback(
+  const onImportFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (!file) return;
@@ -333,8 +336,8 @@ function InnerFlowBuilder() {
   );
 
   // PNG export
-  const rfWrapperRef = React.useRef<HTMLDivElement | null>(null);
-  const exportPNG = React.useCallback(async () => {
+  const rfWrapperRef = useRef<HTMLDivElement | null>(null);
+  const exportPNG = useCallback(async () => {
     if (!rfWrapperRef.current) return;
     try {
       const dataUrl = await htmlToImage.toPng(rfWrapperRef.current, {

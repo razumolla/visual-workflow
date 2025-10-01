@@ -1,4 +1,4 @@
-import React from "react";
+import { type ReactNode } from "react";
 
 export default function Modal({
   open,
@@ -9,7 +9,7 @@ export default function Modal({
   open: boolean;
   onClose: () => void;
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   if (!open) return null;
   return (

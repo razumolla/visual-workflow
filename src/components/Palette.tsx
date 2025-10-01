@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import type { NodeType } from "../types/flow";
 
 export default function Palette({
   onDragStart,
   onExport,
-  // onImport,
   onImportFile,
   onExportPng,
   onUndo,
@@ -16,7 +15,6 @@ export default function Palette({
 }: {
   onDragStart: (e: React.DragEvent, t: NodeType) => void;
   onExport: () => void;
-  // onImport: () => void;
   onImportFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onExportPng: () => void;
   onUndo: () => void;
@@ -26,7 +24,7 @@ export default function Palette({
   onResetView: () => void;
   error: string | null;
 }) {
-  const fileRef = React.useRef<HTMLInputElement | null>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
   return (
     <aside className="border-r bg-white p-3">
       <h2 className="text-base font-semibold mb-3">All Nodes</h2>
