@@ -101,21 +101,20 @@ npm run preview
 
 ## Libraries Used & Why
 
-- [React](https://reactjs.org/) - UI library
-- [TypeScript](https://www.typescriptlang.org/) - Type checking
-- [TailwindCSS](https://tailwindcss.com/) - CSS framework
-- [ReactFlow](https://reactflow.dev/) - Canvas library :battle-tested graph editor primitives (pan/zoom, nodes, edges, minimap, controls).
-- [html-to-image](https://github.com/bubkoo/html-to-image) — PNG export for the canvas snapshot.
+- [React](https://react.dev/) + [ReactFlow](https://reactflow.dev/) : To build the workflow canvas, drag-and-drop nodes, and manage connections efficiently.
+- [TypeScript](https://www.typescriptlang.org/) : Type safety and maintainable code structure.
+- [TailwindCSS](https://tailwindcss.com/) : CSS framework.
+- [html-to-image](https://github.com/bubkoo/html-to-image) : PNG export for the canvas snapshot.
 
 ## Known Limitations
 
-- No backend: frontend-only; flows are not persisted server-side.
-- Minimal field validation (type checks; no deep schema).
-- Simple layout : no auto-layout or advanced snapping
+- No backend integration: Currently frontend-only; flows are not persisted server-side.
+- Basic validation: Minimal field validation (type checks; no deep schema).
+- Simplistic layout : No auto-layout, smart guides, or advanced snapping
 
 ## If I Had More Time
 
-- Schema-driven forms (Zod Schema) with richer validation.
-- Edge rules & execution simulation.
-- Multi-select & marquee selection; copy/paste nodes.
-- Theming and dark mode.
+- Schema-driven validation : Implement Zod-based schemas for more robust, user-friendly form validation.
+- Enhanced workflow logic : Add edge rules, condition handling, and execution simulation.
+- Advanced editing tools : Multi-select, marquee selection, and copy/paste for faster workflow building.
+- UI/UX improvements : Configurable themes, dark mode, and better accessibility support.

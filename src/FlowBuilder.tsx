@@ -48,7 +48,6 @@ import useHistory from "./hooks/useHistory";
 import type { NodeType } from "./types/flow";
 
 function InnerFlowBuilder() {
-  // We'll manage our own change handlers so we can snapshot to history.
   const [nodes, setNodes] = useNodesState([] as Node[]);
   const [edges, setEdges] = useEdgesState([] as Edge[]);
   const { setViewport, getViewport, project } = useReactFlow();
